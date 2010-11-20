@@ -31,9 +31,13 @@ sub header() {
 
 sub validatepath($) {
 	my $path = $_[0];
-	if ($path =~ /(\/|\\)\w+"?$/) {
+	$path =~ s/"//;
+	if ($path =~ /(\/|\\)$/) {
+		#nothing
+	} elsif ($path =~ /(\/|\\)\w+"?$/) {
 		$path .= $1;
 	}
+	return $path;
 }
 
 sub loadf($) {
